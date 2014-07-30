@@ -3,12 +3,12 @@ update_member_count = (num) ->
 
 add_member = (id, info) ->
   $("#players-list").append($(
-    "<div id=\"" + id + "\" class = \"player-row\">" + id + "</div>"
+    "<div id=\"" + id + "\" class = \"player-row\">" + info.username + "</div>"
   ))
 
 $(document).ready ->
   # mixpanel.track "Testing"
-  pusher = new Pusher('09cf08647086db9a063a', { authEndpoint: '/auth' });
+  pusher = new Pusher('09cf08647086db9a063a', { authEndpoint: '/pauth' });
   channel = pusher.subscribe('presence-spyvspy')
   channel.bind 'pusher:subscription_succeeded', (members) ->
     update_member_count(members.count)
